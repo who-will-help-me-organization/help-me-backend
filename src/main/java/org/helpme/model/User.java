@@ -3,12 +3,15 @@ package org.helpme.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection = "users")
 public class User {
 	@Id
 	private String id;
 	
 	private String usercode;
+	@JsonIgnore
 	private String password;
 	
 	private int courseCode;
@@ -83,4 +86,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 	
+	public boolean authenticate(String password) {
+		return this.password.equals(password);
+	}
 }

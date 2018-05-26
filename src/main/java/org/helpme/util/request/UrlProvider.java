@@ -1,6 +1,9 @@
 package org.helpme.util.request;
 
 public class UrlProvider {
+	public static final String SERVER = "/helpmeapi";
+	
+	public static final String authentication = SERVER + "/authentication";
 	
 	// Top
 	
@@ -10,7 +13,7 @@ public class UrlProvider {
 	
 	// Middle
 	
-	public static String authentication() {
+	public final static String authentication() {
 		return server() + "/authentication";
 	}
 	

@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
+import org.helpme.bean.BLogin;
 import org.helpme.model.User;
 import org.helpme.service.abs.UserService;
 import org.helpme.util.security.SecurityCons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -29,10 +29,10 @@ public class AuthenticationServiceImpl {
     	this.userService = userService;
     }
 
-    public User authenticate(LoginBean loginBean) {
-        User user = userService.findByIdentifier(loginBean.getIdentifier());
+    public User authenticate(BLogin bLogin) {
+        User user = userService.findByUsercode(bLogin.getUsercode());
 
-        if (user != null && user.authenticate(loginBean.getPassword())) {
+        if (user != null && user.authenticate(bLogin.getPassword())) {
             return user;
         }
 
