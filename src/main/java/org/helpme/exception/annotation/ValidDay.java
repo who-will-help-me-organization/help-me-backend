@@ -11,8 +11,11 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.NotBlank;
 
 import org.helpme.exception.validator.DayValidator;
+
+@NotBlank(message = "Day should not be blank")
 
 @Retention(RUNTIME)
 @Target({ METHOD, FIELD, PARAMETER })

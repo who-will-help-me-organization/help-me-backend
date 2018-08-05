@@ -61,7 +61,7 @@ public class TutorServiceImpl implements TutorService {
 	public Tutor create(BSignTutor body) {
 		Tutor tutor = ModelFactory.createTutor(body);
 		
-		userService.findByUsercode(tutor.getUsercode());
+		userService.findByCode(tutor.getUsercode());
 		
 		if (tutorRepository.findByUsercode(tutor.getUsercode()).isPresent()) {
 			throw new TutorAlreadyExistsException();
