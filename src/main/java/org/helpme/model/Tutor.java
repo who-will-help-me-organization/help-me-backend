@@ -20,7 +20,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"usercode"})
+@EqualsAndHashCode(of = {"id"})
 public class Tutor {
 	@Id
 	private String id;

@@ -3,7 +3,7 @@ package org.helpme.model;
 import org.helpme.bean.BOnlineRequest;
 import org.helpme.bean.BPresentialRequest;
 import org.helpme.bean.BRating;
-import org.helpme.bean.BSignTutor;
+import org.helpme.bean.tutor.BSignTutor;
 import org.helpme.bean.user.BSignup;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -22,7 +22,7 @@ public class ModelFactory {
 	public static Tutor createTutor(BSignTutor b) {
 		return new Tutor(b.getUsercode(), 
 						 b.getSubject(),
-						 b.getLevel());
+						 b.getKnowhow());
 	}
 	
 	public static Request createOnlineRequest(BOnlineRequest b, User requester) {
