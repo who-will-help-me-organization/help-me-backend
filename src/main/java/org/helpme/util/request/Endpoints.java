@@ -3,8 +3,8 @@ package org.helpme.util.request;
 import org.springframework.http.HttpMethod;
 
 public enum Endpoints {
-	LOGIN(UrlProvider.login(), HttpMethod.POST),
-	SIGNUP(UrlProvider.signup(), HttpMethod.POST);
+	LOGIN(UrlProvider.AUTHENTICATION, HttpMethod.POST),
+	SIGNUP(UrlProvider.USER, HttpMethod.POST);
 
 	private String url;
 	private HttpMethod method;

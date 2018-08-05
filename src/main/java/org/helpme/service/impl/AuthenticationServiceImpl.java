@@ -1,16 +1,19 @@
 package org.helpme.service.impl;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.Optional;
 
 import org.helpme.bean.BLogin;
+import org.helpme.exception.custom.AuthenticationException;
+import org.helpme.exception.custom.AuthorizationException;
 import org.helpme.model.User;
+import org.helpme.service.abs.AuthenticationService;
 import org.helpme.service.abs.UserService;
 import org.helpme.util.security.SecurityCons;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -19,9 +22,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
-public class AuthenticationServiceImpl {
-    private static final String ISSUER = "random";
-    
+public class AuthenticationServiceImpl implements AuthenticationService {
     private UserService userService;
     
     @Autowired
@@ -30,34 +31,35 @@ public class AuthenticationServiceImpl {
     }
 
     public User authenticate(BLogin bLogin) {
-        User user = userService.findByUsercode(bLogin.getUsercode());
+        Optional<User> user = Optional.of(userService.findByUsercode(bLogin.getUsercode()));
 
-        if (user != null && user.authenticate(bLogin.getPassword())) {
-            return user;
+        if (user.isPresent() && BCrypt.checkpw(bLogin.getPassword(), user.get().getPassword())) {
+            return user.get();
+        } else {
+        	throw new AuthenticationException("Incorrect username or password.");
         }
-
-        throw new RuntimeException();
     }
 
-    public String tokenFor(User user) throws IOException, URISyntaxException {
-
-        Date expiration = Date.from(LocalDateTime.now().plusHours(24 * 7).toInstant(ZoneOffset.UTC));
+    public String tokenFor(User user) {
+        Date expiration = Date.from(LocalDateTime.now().plusHours(24).toInstant(ZoneOffset.UTC));
+        
         return Jwts.builder()
                 .setSubject(user.getUsercode())
                 .setExpiration(expiration)
-                .setIssuer(ISSUER)
+                .setIssuer(SecurityCons.ISSUER)
                 .signWith(SignatureAlgorithm.HS512, SecurityCons.SECRET)
                 .compact();
     }
 
-    public User getUserFromToken(String token) throws IOException, URISyntaxException {
+    public User getUserFromToken(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(SecurityCons.SECRET).parseClaimsJws(token);
-        User user = userService.findByUsercode(claims.getBody().getSubject().toString());
+        Optional<User> user = Optional.of(userService.findByUsercode(claims.getBody().getSubject().toString()));
 
-        if (user != null)
-            return user;
-        else
-            throw new RuntimeException();
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new AuthorizationException("Not able to get an user from the given token.");
+        }
     }
 
 }
