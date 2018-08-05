@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.helpme.bean.BSignup;
-import org.helpme.exception.custom.resexists.UserAlreadyExists;
+import org.helpme.exception.custom.resexists.UserAlreadyExistsException;
 import org.helpme.exception.custom.resnotfound.UserNotFoundException;
 import org.helpme.model.ModelFactory;
 import org.helpme.model.User;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 		User user = ModelFactory.createUser(body);
 		
 		if (userRepository.findByUsercode(user.getUsercode()).isPresent()) {
-			throw new UserAlreadyExists();
+			throw new UserAlreadyExistsException();
 		}
 		
 		return userRepository.save(user);
@@ -63,7 +63,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByUsercode(String usercode) {
+		Optional<User> user = userRepository.findByUsercode(usercode);
 		
-		return null;
+		if (user.isPresent()) {
+			return user.get();	
+		}
+		
+		throw new UserNotFoundException();
 	}
 }

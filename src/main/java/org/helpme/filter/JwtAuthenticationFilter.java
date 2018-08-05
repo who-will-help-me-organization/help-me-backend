@@ -1,7 +1,6 @@
 package org.helpme.filter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.helpme.exception.custom.AuthorizationException;
 import org.helpme.model.AuthenticatedUser;
 import org.helpme.util.security.SecurityCons;
 import org.springframework.security.core.context.SecurityContextHolder;

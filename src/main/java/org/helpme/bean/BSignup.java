@@ -12,15 +12,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class BSignup {
-	@ValidUserCode @Getter @Setter private String usercode;
-	@ValidPassword @Getter @Setter private String password;
-	@Getter @Setter private String passwordConfirmation;
+	@ValidUserCode private String usercode;
+	@ValidPassword private String password;
+	private String passwordConfirmation;
 	
-	@ValidCourseCode @Getter @Setter private String courseCode;
-	@ValidEmail @Getter @Setter private String email;
-	@ValidName @Getter @Setter private String name;
-	@ValidPhoneNumber @Getter @Setter private String phoneNumber;
+	@ValidCourseCode private String courseCode;
+	@ValidEmail private String email;
+	@ValidName private String name;
+	@ValidPhoneNumber private String phoneNumber;
 }

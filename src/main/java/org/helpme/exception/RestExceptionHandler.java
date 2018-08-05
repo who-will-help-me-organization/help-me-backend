@@ -2,7 +2,8 @@ package org.helpme.exception;
 
 import java.util.Date;
 
-import org.helpme.exception.custom.resexists.ResourceAlreadyExists;
+import org.helpme.exception.custom.incomserv.IncompleteOperationException;
+import org.helpme.exception.custom.resexists.ResourceAlreadyExistsException;
 import org.helpme.exception.custom.resnotfound.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = {ResourceNotFoundException.class})
-	protected ResponseEntity<Object> handleResouceNotFound(RuntimeException e, WebRequest request) {
+	protected ResponseEntity<Object> handleResouceNotFound(ResourceNotFoundException e, WebRequest request) {
 		ApiError error = new ApiError("Resource not found",
 				  					  e.getMessage(),
 				  					  new Date());
@@ -27,9 +28,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(value = {ResourceAlreadyExists.class})
-	protected ResponseEntity<Object> handleResouceAlreadyExists(RuntimeException e, WebRequest request) {
+	@ExceptionHandler(value = {ResourceAlreadyExistsException.class})
+	protected ResponseEntity<Object> handleResouceAlreadyExists(ResourceAlreadyExistsException e, WebRequest request) {
 		ApiError error = new ApiError("Resource already exists",
+									  e.getMessage(),
+									  new Date());
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(value = {IncompleteOperationException.class})
+	protected ResponseEntity<Object> handleIncompleteOperation(IncompleteOperationException e, WebRequest request) {
+		ApiError error = new ApiError("Could not complete operation",
 									  e.getMessage(),
 									  new Date());
 		

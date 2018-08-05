@@ -1,31 +1,15 @@
 package org.helpme.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class BLogin {
 	private String usercode;
 	private String password;
-	
-	public BLogin(String usercode, String password) {
-		this.usercode = usercode;
-		this.password = password;
-	}
-	
-	public BLogin() {
-		
-	}
-
-	public String getUsercode() {
-		return usercode;
-	}
-
-	public void setUsercode(String usercode) {
-		this.usercode = usercode;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

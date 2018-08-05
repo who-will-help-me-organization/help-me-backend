@@ -2,14 +2,14 @@ package org.helpme.exception.custom.resexists;
 
 import org.helpme.exception.custom.TopLevelException;
 
-public class ResourceAlreadyExists extends TopLevelException {
+public class ResourceAlreadyExistsException extends TopLevelException {
 	private static final long serialVersionUID = -5449088115048847334L;
 
-	public ResourceAlreadyExists(String msg) {
+	public ResourceAlreadyExistsException(String msg) {
 		super(msg);
 	}
 	
-	public ResourceAlreadyExists() {
+	public ResourceAlreadyExistsException() {
 		super("Resource already exists in the database.");
 	}
 }
