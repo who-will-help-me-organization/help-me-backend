@@ -1,7 +1,12 @@
 package org.helpme.service.impl;
 
+import java.util.Collection;
 import java.util.Optional;
 
+import org.helpme.bean.BSignup;
+import org.helpme.exception.custom.resexists.UserAlreadyExists;
+import org.helpme.exception.custom.resnotfound.UserNotFoundException;
+import org.helpme.model.ModelFactory;
 import org.helpme.model.User;
 import org.helpme.repository.UserRepository;
 import org.helpme.service.abs.UserService;
@@ -18,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Iterable<User> findAll() {
+	public Collection<User> findAll() {
 		return userRepository.findAll();
 	}
 
@@ -29,24 +34,31 @@ public class UserServiceImpl implements UserService {
 		if (user.isPresent()) {
 			return user.get();
 		} else {
-			throw new RuntimeException();
+			throw new UserNotFoundException();
 		}
 	}
 
 	@Override
-	public User save(User user) {
+	public User create(BSignup body) {
+		User user = ModelFactory.createUser(body);
+		
+		if (userRepository.findByUsercode(user.getUsercode()).isPresent()) {
+			throw new UserAlreadyExists();
+		}
+		
 		return userRepository.save(user);
 	}
 
 	@Override
 	public User deleteById(String id) {
-		User deletedUser = findById(id);
+		Optional<User> user = userRepository.findById(id);
 		
-		if (deletedUser != null) {
-			userRepository.deleteById(deletedUser.getId());
-			return deletedUser;
+		if (user.isPresent()) {
+			userRepository.delete(user.get());
+			return user.get();
 		}
-		throw new RuntimeException();
+		
+		throw new UserNotFoundException();
 	}
 
 	@Override
