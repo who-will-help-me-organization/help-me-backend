@@ -1,7 +1,7 @@
 package org.helpme.controller;
 
-import org.helpme.bean.BLogin;
-import org.helpme.bean.BRAuth;
+import org.helpme.bean.auth.BLogin;
+import org.helpme.bean.auth.BRAuth;
 import org.helpme.model.User;
 import org.helpme.service.abs.AuthenticationService;
 import org.helpme.service.impl.AuthenticationServiceImpl;

@@ -20,15 +20,14 @@ public class Rating {
 	@Id
 	private String id;
 	
+	private double grade;
+	
 	@DBRef
 	private User ratingUser;
 	@DBRef
 	private Tutor ratedTutor;
 	@DBRef
-	private Request ratedRequest;
-	
-	private double grade;
-	
+	private Request ratedRequest;	
 	
 	public Rating(double grade, User ratingUser, Tutor ratedTutor, Request ratedRequest) {
 		this.grade = grade;

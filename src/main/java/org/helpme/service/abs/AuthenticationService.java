@@ -1,6 +1,6 @@
 package org.helpme.service.abs;
 
-import org.helpme.bean.BLogin;
+import org.helpme.bean.auth.BLogin;
 import org.helpme.model.User;
 
 public interface AuthenticationService {

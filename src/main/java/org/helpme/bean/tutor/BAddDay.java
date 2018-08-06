@@ -1,4 +1,6 @@
-package org.helpme.bean;
+package org.helpme.bean.tutor;
+
+import org.helpme.exception.annotation.ValidDay;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BLogin {
-	private String usercode;
-	private String password;
+public class BAddDay {
+	@ValidDay private String day;
 }

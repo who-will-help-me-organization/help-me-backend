@@ -1,4 +1,4 @@
-package org.helpme.bean;
+package org.helpme.bean.user;
 
 import org.helpme.exception.annotation.ValidCourseCode;
 import org.helpme.exception.annotation.ValidEmail;
@@ -17,9 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BSignup {
-	@ValidUserCode private String usercode;
+	@ValidUserCode private String code;
 	@ValidPassword private String password;
-	private String passwordConfirmation;
 	
 	@ValidCourseCode private String courseCode;
 	@ValidEmail private String email;

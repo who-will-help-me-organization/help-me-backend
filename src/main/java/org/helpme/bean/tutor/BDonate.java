@@ -1,4 +1,6 @@
-package org.helpme.bean;
+package org.helpme.bean.tutor;
+
+import org.helpme.exception.annotation.ValidDonation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BAddLocation {
-	private String location;
+public class BDonate {
+	@ValidDonation private double amount;
 }

@@ -4,11 +4,10 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
-import org.helpme.bean.BAddDay;
-import org.helpme.bean.BAddLocation;
-import org.helpme.bean.BDonate;
-import org.helpme.bean.BRating;
-import org.helpme.bean.BSignTutor;
+import org.helpme.bean.tutor.BAddDay;
+import org.helpme.bean.tutor.BAddLocation;
+import org.helpme.bean.tutor.BDonate;
+import org.helpme.bean.tutor.BSignTutor;
 import org.helpme.model.Tutor;
 import org.helpme.service.abs.TutorService;
 import org.helpme.service.impl.TutorServiceImpl;
@@ -59,11 +58,6 @@ public class TutorController {
 	@PatchMapping(value = "/{id}/location")
 	public ResponseEntity<Tutor> addLocation(@PathVariable String id, @Valid @RequestBody BAddLocation body) {		
 		return new ResponseEntity<>(tutorService.addLocation(id, body), HttpStatus.OK);
-	}
-	
-	@PatchMapping(value = "/{id}/rate")
-	public ResponseEntity<Tutor> addRating(@PathVariable String id, @Valid @RequestBody BRating body) {
-		return new ResponseEntity<>(tutorService.rate(id, body), HttpStatus.OK);
 	}
 	
 	@PatchMapping(value = "/{id}/donate")

@@ -1,7 +1,11 @@
 package org.helpme.service.impl;
 
-import org.helpme.bean.BRating;
+import java.util.Optional;
+
+import org.helpme.bean.rating.BRating;
+import org.helpme.exception.custom.incomserv.NotResquestOwnerException;
 import org.helpme.exception.custom.resexists.RatingAlreadyExistsException;
+import org.helpme.exception.custom.resnotfound.RatingNotFoundException;
 import org.helpme.model.ModelFactory;
 import org.helpme.model.Rating;
 import org.helpme.model.Request;
@@ -41,14 +45,32 @@ public class RatingServiceImpl implements RatingService {
 	private void setRequestService(RequestServiceImpl service) {
 		this.requestService = service;
 	}
+	
+	@Override
+	public Rating findById(String id) {
+		Optional<Rating> rating = ratingRepository.findById(id);
+		
+		if (rating.isPresent()) {
+			return rating.get();
+		}
+		
+		throw new RatingNotFoundException();
+	}
 
 	@Override
 	public Rating create(BRating body) {
 		Request request = requestService.findById(body.getRequestId());
-		User requester = userService.findById(body.getRequestingUserId());
+		User requester = userService.findById(body.getRequesterId());
 		Tutor tutor = tutorService.findById(body.getTutorId());
+		
+		// Check if requester is the owner of the request
+		if (!request.getRequester().equals(requester)) {
+			throw new NotResquestOwnerException();
+		}
+		
 		Rating rating = ModelFactory.createRating(body, requester, request, tutor);
 		
+		// Check if there are no other rating for this request
 		if (ratingRepository.findByRatedRequestId(request.getId()).isPresent()) {
 			throw new RatingAlreadyExistsException();
 		}
@@ -57,12 +79,6 @@ public class RatingServiceImpl implements RatingService {
 		tutorService.rate(tutor.getId(), body);
 		
 		return rate;
-	}
-
-	@Override
-	public Rating findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
 

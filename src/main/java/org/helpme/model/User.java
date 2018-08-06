@@ -17,13 +17,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"usercode"})
+@EqualsAndHashCode(of = {"id"})
 public class User {
 	@Id
 	private String id;
 	
 	@Indexed(unique = true)
-	private String usercode;
+	private String code;
 	@JsonIgnore
 	private String password;
 	
@@ -32,9 +32,9 @@ public class User {
 	private String name;
 	private String phoneNumber;
 	
-	public User(String usercode, String password, String courseCode, String email, String name,
+	public User(String code, String password, String courseCode, String email, String name,
 			String phoneNumber) {
-		this.usercode = usercode;
+		this.code = code;
 		this.password = password;
 		this.courseCode = courseCode;
 		this.email = email;

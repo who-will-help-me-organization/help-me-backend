@@ -1,6 +1,4 @@
-package org.helpme.bean;
-
-import javax.validation.constraints.NotNull;
+package org.helpme.bean.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BOnlineRequest {
-	private String userId;
-	@NotNull private String subject;
+public class BLogin {
+	private String usercode;
+	private String password;
 }

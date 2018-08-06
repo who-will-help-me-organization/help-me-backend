@@ -3,11 +3,11 @@ package org.helpme.service.impl;
 import java.util.Collection;
 import java.util.Optional;
 
-import org.helpme.bean.BAddDay;
-import org.helpme.bean.BAddLocation;
-import org.helpme.bean.BDonate;
-import org.helpme.bean.BRating;
-import org.helpme.bean.BSignTutor;
+import org.helpme.bean.rating.BRating;
+import org.helpme.bean.tutor.BAddDay;
+import org.helpme.bean.tutor.BAddLocation;
+import org.helpme.bean.tutor.BDonate;
+import org.helpme.bean.tutor.BSignTutor;
 import org.helpme.exception.custom.resexists.TutorAlreadyExistsException;
 import org.helpme.exception.custom.resnotfound.TutorNotFoundException;
 import org.helpme.exception.custom.resnotfound.UserNotFoundException;
@@ -61,7 +61,7 @@ public class TutorServiceImpl implements TutorService {
 	public Tutor create(BSignTutor body) {
 		Tutor tutor = ModelFactory.createTutor(body);
 		
-		userService.findByUsercode(tutor.getUsercode());
+		userService.findByCode(tutor.getUsercode());
 		
 		if (tutorRepository.findByUsercode(tutor.getUsercode()).isPresent()) {
 			throw new TutorAlreadyExistsException();

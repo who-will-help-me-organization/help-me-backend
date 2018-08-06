@@ -1,4 +1,4 @@
-package org.helpme.bean;
+package org.helpme.bean.tutor;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -17,5 +17,5 @@ import lombok.Setter;
 public class BSignTutor {
 	@ValidUserCode private String usercode;
 	@NotEmpty private String subject;
-	@ValidLevel private int level;
+	@ValidLevel private int knowhow;
 }

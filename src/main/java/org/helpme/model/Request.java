@@ -1,8 +1,5 @@
 package org.helpme.model;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,13 +21,11 @@ public class Request {
 	private String id;
 	
 	@DBRef
-	@NotNull
 	private User requester;
 	
-	@NotEmpty
-	private String subject;
 	private String day;
 	private String location;
+	private String subject;
 	
 	public Request(String subject, String day, String location, User requester) {
 		this.subject = subject;

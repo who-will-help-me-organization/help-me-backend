@@ -2,11 +2,11 @@ package org.helpme.service.abs;
 
 import java.util.Collection;
 
-import org.helpme.bean.BAddDay;
-import org.helpme.bean.BAddLocation;
-import org.helpme.bean.BDonate;
-import org.helpme.bean.BRating;
-import org.helpme.bean.BSignTutor;
+import org.helpme.bean.rating.BRating;
+import org.helpme.bean.tutor.BAddDay;
+import org.helpme.bean.tutor.BAddLocation;
+import org.helpme.bean.tutor.BDonate;
+import org.helpme.bean.tutor.BSignTutor;
 import org.helpme.model.Tutor;
 
 public interface TutorService {
