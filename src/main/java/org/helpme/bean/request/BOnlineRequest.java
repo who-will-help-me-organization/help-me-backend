@@ -1,6 +1,6 @@
-package org.helpme.bean;
+package org.helpme.bean.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,5 +13,5 @@ import lombok.Setter;
 @Setter
 public class BOnlineRequest {
 	private String userId;
-	@NotNull private String subject;
+	@NotBlank private String subject;
 }

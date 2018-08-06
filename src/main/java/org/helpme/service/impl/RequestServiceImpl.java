@@ -3,8 +3,8 @@ package org.helpme.service.impl;
 import java.util.Collection;
 import java.util.Optional;
 
-import org.helpme.bean.BOnlineRequest;
-import org.helpme.bean.BPresentialRequest;
+import org.helpme.bean.request.BOnlineRequest;
+import org.helpme.bean.request.BPresentialRequest;
 import org.helpme.exception.custom.incomserv.NoTutorAvailableException;
 import org.helpme.exception.custom.resnotfound.RequestNotFoundException;
 import org.helpme.exception.custom.resnotfound.UserNotFoundException;
@@ -82,13 +82,23 @@ public class RequestServiceImpl implements RequestService {
 	
 	private Tutor getTutorOnline(Request request) {
 		Collection<Tutor> tutors = tutorService.findAll();
+		Tutor bestChoice = null;
 		
 		for (Tutor tutor : tutors) {
-			System.out.println(tutor.getSubject() + "    " + request.getSubject());
-			
 			if (tutor.getSubject().equalsIgnoreCase(request.getSubject())) {
-				return tutor;
+				if (bestChoice != null) {
+					if (tutor.getRating() > bestChoice.getRating()) {
+						bestChoice = tutor;
+					}
+				} else {
+					bestChoice = tutor;
+				}
+				
 			}
+		}
+		
+		if (bestChoice != null) {
+			return bestChoice;
 		}
 		
 		throw new NoTutorAvailableException();
@@ -100,7 +110,11 @@ public class RequestServiceImpl implements RequestService {
 		
 		for (Tutor tutor : tutors) {
 			if (tutor.getSubject().equals(request.getSubject()) && tutor.getDays().contains(request.getDay())) {
-				if (bestChoice != null && tutor.getRating() > bestChoice.getRating()) {
+				if (bestChoice != null) {
+					if (tutor.getRating() > bestChoice.getRating()) {
+						bestChoice = tutor;
+					}
+ 				} else {
 					bestChoice = tutor;
 				}
 			}

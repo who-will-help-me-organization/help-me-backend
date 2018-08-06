@@ -1,7 +1,7 @@
 package org.helpme.service.abs;
 
-import org.helpme.bean.BOnlineRequest;
-import org.helpme.bean.BPresentialRequest;
+import org.helpme.bean.request.BOnlineRequest;
+import org.helpme.bean.request.BPresentialRequest;
 import org.helpme.model.Request;
 import org.helpme.model.Tutor;
 

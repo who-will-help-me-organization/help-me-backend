@@ -1,6 +1,6 @@
-package org.helpme.bean;
+package org.helpme.bean.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.helpme.exception.annotation.ValidDay;
 
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class BPresentialRequest {
 	private String userId;
-	@NotNull private String subject;
+	@NotBlank private String subject;
 	@ValidDay private String day;
-	@NotNull private String location;
+	@NotBlank private String location;
 }
