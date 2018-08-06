@@ -19,7 +19,6 @@ import lombok.Setter;
 public class BSignup {
 	@ValidUserCode private String code;
 	@ValidPassword private String password;
-	private String passwordConfirmation;
 	
 	@ValidCourseCode private String courseCode;
 	@ValidEmail private String email;

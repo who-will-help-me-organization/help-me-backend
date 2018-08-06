@@ -5,7 +5,7 @@ import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.Optional;
 
-import org.helpme.bean.tutor.BLogin;
+import org.helpme.bean.auth.BLogin;
 import org.helpme.exception.custom.AuthenticationException;
 import org.helpme.exception.custom.AuthorizationException;
 import org.helpme.model.User;
