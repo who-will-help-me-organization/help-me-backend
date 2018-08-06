@@ -1,4 +1,4 @@
-package org.helpme.bean.tutor;
+package org.helpme.bean.auth;
 
 import org.helpme.model.User;
 
