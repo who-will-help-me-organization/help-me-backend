@@ -3,7 +3,7 @@ package org.helpme.service.impl;
 import java.util.Collection;
 import java.util.Optional;
 
-import org.helpme.bean.BRating;
+import org.helpme.bean.rating.BRating;
 import org.helpme.bean.tutor.BAddDay;
 import org.helpme.bean.tutor.BAddLocation;
 import org.helpme.bean.tutor.BDonate;

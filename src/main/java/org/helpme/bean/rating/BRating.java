@@ -1,4 +1,4 @@
-package org.helpme.bean;
+package org.helpme.bean.rating;
 
 import org.helpme.exception.annotation.ValidGrade;
 
@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BRating {
-	private String requestId;
-	private String requestingUserId;
-	private String tutorId;
 	@ValidGrade private double grade;
+	private String requesterId;
+	private String tutorId;
+	private String requestId;
 }

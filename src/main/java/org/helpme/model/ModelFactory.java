@@ -1,6 +1,6 @@
 package org.helpme.model;
 
-import org.helpme.bean.BRating;
+import org.helpme.bean.rating.BRating;
 import org.helpme.bean.request.BOnlineRequest;
 import org.helpme.bean.request.BPresentialRequest;
 import org.helpme.bean.tutor.BSignTutor;
